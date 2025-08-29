@@ -1,58 +1,41 @@
 // src/App.jsx
-import { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Dashboard from "./pages/Dashboard";
+import Roadmap from "./pages/Roadmap";
+import NewGoal from "./pages/NewGoal";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import NotFound from "./pages/NotFound";
 
 export default function App() {
-  const [page, setPage] = useState("home");
-
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50">
-      {/* Navbar */}
+    <Router>
+      {/* Navbar will always show */}
       <nav className="bg-white shadow p-4 flex justify-between items-center">
         <h1 className="text-2xl font-bold text-blue-600">MAPIFY 🚀</h1>
         <div className="space-x-4">
-          <button onClick={() => setPage("home")} className="hover:text-blue-600">
-            Home
-          </button>
-          <button onClick={() => setPage("about")} className="hover:text-blue-600">
-            About
-          </button>
-          <button onClick={() => setPage("contact")} className="hover:text-blue-600">
-            Contact
-          </button>
+          <a href="/" className="hover:text-blue-600">Home</a>
+          <a href="/dashboard" className="hover:text-blue-600">Dashboard</a>
+          <a href="/roadmap" className="hover:text-blue-600">Roadmap</a>
+          <a href="/newgoal" className="hover:text-blue-600">New Goal</a>
+          <a href="/login" className="hover:text-blue-600">Login</a>
+          <a href="/register" className="hover:text-blue-600">Register</a>
         </div>
       </nav>
 
       {/* Page Content */}
       <main className="flex-1 p-6">
-        {page === "home" && (
-          <div className="text-center">
-            <h2 className="text-3xl font-semibold">Welcome to Mapify</h2>
-            <p className="mt-2 text-gray-600">
-              Your personalized learning roadmap builder.
-            </p>
-          </div>
-        )}
-
-        {page === "about" && (
-          <div>
-            <h2 className="text-3xl font-semibold">About Mapify</h2>
-            <p className="mt-2 text-gray-600">
-              Mapify helps you create AI-powered learning paths, track progress,
-              and gamify your journey 🚀
-            </p>
-          </div>
-        )}
-
-        {page === "contact" && (
-          <div>
-            <h2 className="text-3xl font-semibold">Contact Us</h2>
-            <p className="mt-2 text-gray-600">
-              Reach out at <span className="font-medium">support@mapify.com</span>
-            </p>
-          </div>
-        )}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/roadmap" element={<Roadmap />} />
+          <Route path="/newgoal" element={<NewGoal />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </main>
-    </div>
+    </Router>
   );
 }
-

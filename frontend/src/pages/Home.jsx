@@ -13,19 +13,19 @@ export default function Home() {
             Set a goal, get a personalized learning path, track progress, and showcase projects.
           </p>
           <div className="mt-6 flex gap-3">
-            <Link to="/register" className="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700">
-              Get Started
+            <Link to="/roadmap/new" className="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700">
+              Create your first goal
             </Link>
-            <Link to="/login" className="px-4 py-2 rounded border hover:bg-gray-50">
-              I already have an account
+            <Link to="/dashboard" className="px-4 py-2 rounded border hover:bg-gray-50">
+              View dashboard
             </Link>
           </div>
         </div>
         <div className="rounded-2xl border bg-white p-6 shadow-sm">
           <div className="h-48 rounded-lg bg-gradient-to-br from-blue-50 to-purple-50 grid place-items-center">
-            <span className="text-blue-600 font-semibold">Preview</span>
+            <span className="text-blue-600 font-semibold">Roadmap Preview</span>
           </div>
-          <p className="mt-4 text-sm text-gray-500">You’ll see progress charts and skills mapping here.</p>
+          <p className="mt-4 text-sm text-gray-500">Interactive steps, progress bars, and badges.</p>
         </div>
       </section>
     </AppLayout>
