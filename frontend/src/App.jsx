@@ -2,7 +2,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
-import Roadmap from "./pages/Roadmap";
+import Roadmap from "./pages/Roadmaps";
 import NewGoal from "./pages/NewGoal";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -29,7 +29,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/roadmap" element={<Roadmap />} />
+          <Route path="/roadmaps" element={<Roadmap />} />
           <Route path="/newgoal" element={<NewGoal />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
