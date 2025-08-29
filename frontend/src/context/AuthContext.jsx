@@ -11,7 +11,6 @@ export function AuthProvider({ children }) {
   }, []);
 
   const login = async ({ email }) => {
-    // TEMP stub: partner will wire real auth; this just unblocks UI work
     const fake = { email, name: email.split("@")[0], token: "dev-token" };
     localStorage.setItem("user", JSON.stringify(fake));
     localStorage.setItem("token", fake.token);
@@ -25,10 +24,25 @@ export function AuthProvider({ children }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated: !!user, login, logout }}>
+    <AuthContext.Provider
+      value={{ user, isAuthenticated: !!user, login, logout }}
+    >
       {children}
     </AuthContext.Provider>
   );
 }
 
-export const useAuth = () => useContext(AuthContext);
+// ✅ with fallback
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (!context) {
+    console.error("⚠️ useAuth must be used inside AuthProvider");
+    return {
+      user: null,
+      isAuthenticated: false,
+      login: () => {},
+      logout: () => {},
+    };
+  }
+  return context;
+};

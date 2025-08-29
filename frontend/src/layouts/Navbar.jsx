@@ -12,6 +12,10 @@ export default function Navbar() {
         </Link>
         <div className="flex items-center gap-4">
           <Link to="/" className="text-sm hover:text-blue-600">Home</Link>
+
+          {/* 👇 Add Roadmap Link here */}
+          <Link to="/roadmap" className="text-sm hover:text-blue-600">Roadmap</Link>
+
           {isAuthenticated && (
             <Link to="/dashboard" className="text-sm hover:text-blue-600">Dashboard</Link>
           )}

@@ -1,8 +1,5 @@
 import { create } from "zustand";
-import { nanoid } from "nanoid/non-secure"; // optional; else use Date.now()
-
-// if nanoid not installed, either install: npm i nanoid
-// or replace nanoid() with String(Date.now())
+import { nanoid } from "nanoid/non-secure"; // or String(Date.now())
 
 export const useAppStore = create((set, get) => ({
   goals: [],             // [{id, title, progress}]
@@ -10,22 +7,26 @@ export const useAppStore = create((set, get) => ({
 
   addGoal: (title) => {
     const id = typeof nanoid === "function" ? nanoid() : String(Date.now());
+
     const steps = [
       { id: "s1", title: "Learn Python basics", description: "Variables, loops, functions.", completed: false },
       { id: "s2", title: "Git & GitHub", description: "Branching, PRs, issues.", completed: false },
       { id: "s3", title: "Mini project", description: "CLI tool or small web app.", completed: false },
     ];
-    const progress = 0;
+
     set((state) => ({
-      goals: [{ id, title, progress }, ...state.goals],
+      goals: [{ id, title, progress: 0 }, ...state.goals],
       stepsByGoal: { ...state.stepsByGoal, [id]: steps }
     }));
+
     return id;
   },
 
   toggleStep: (goalId, stepId) => {
     const map = { ...get().stepsByGoal };
-    const steps = map[goalId]?.map(s => s.id === stepId ? { ...s, completed: !s.completed } : s) || [];
+    const steps = map[goalId]?.map(s =>
+      s.id === stepId ? { ...s, completed: !s.completed } : s
+    ) || [];
     map[goalId] = steps;
 
     const done = steps.filter(s => s.completed).length;
@@ -33,7 +34,9 @@ export const useAppStore = create((set, get) => ({
 
     set((state) => ({
       stepsByGoal: map,
-      goals: state.goals.map(g => g.id === goalId ? { ...g, progress } : g)
+      goals: state.goals.map(g =>
+        g.id === goalId ? { ...g, progress } : g
+      )
     }));
   }
 }));

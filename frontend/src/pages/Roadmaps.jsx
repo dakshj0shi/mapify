@@ -4,7 +4,9 @@ import { useAppStore } from "../lib/store";
 
 export default function Roadmap() {
   const { id } = useParams();
-  const steps = useAppStore(s => s.stepsByGoal[id] || []);
+
+  // selectors must return the same reference if unchanged
+  const steps = useAppStore(s => s.stepsByGoal[id]) || [];
   const toggle = useAppStore(s => s.toggleStep);
   const goal = useAppStore(s => s.goals.find(g => g.id === id));
 
@@ -17,7 +19,10 @@ export default function Roadmap() {
 
       <div className="mt-4 grid gap-3">
         {steps.map(s => (
-          <label key={s.id} className="rounded-xl border bg-white p-4 flex gap-3 items-start cursor-pointer">
+          <label
+            key={s.id}
+            className="rounded-xl border bg-white p-4 flex gap-3 items-start cursor-pointer"
+          >
             <input
               type="checkbox"
               className="mt-1"
